@@ -18,13 +18,6 @@ extensions:
 	mojeId: FreezyBee\MojeId\DI\MojeIdExtension
 ```
 
-        'serverUrl' => 'https://mojeid.cz/',
-        'policy' => [],
-        'fieldsType' => 'simple',
-        'debugger' => '%debugMode%',
-        'tempDir' => '%tempDir%'
-
-
 Full configuration
 ---------------------
 
@@ -55,8 +48,8 @@ class SignPresenter extends BasePresenter
 	/** @var \FreezyBee\MojeId\MojeId @inject */
 	public $mojeId;
 
-	/** @var UsersModel */
-	private $usersModel;
+	/** @var UsersModel @inject */
+	public $usersModel;
 
 	/*
 	 *	@param $request - required !!!
