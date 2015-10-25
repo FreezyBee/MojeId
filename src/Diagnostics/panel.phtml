@@ -1,0 +1,17 @@
+<style>
+    #nette-debug .nette-mojeIdPanel,
+    #tracy-debug .nette-mojeIdPanel { min-width: 700px; }
+    #nette-debug .nette-mojeIdPanel table,
+    #tracy-debug .nette-mojeIdPanel table { width: 100%; }
+</style>
+
+<div class="nette-inner tracy-inner nette-mojeIdPanel">
+    <table>
+        <tr><td>Request</td></tr>
+        <tr><td><?php echo $click($this->request, TRUE); ?></td></tr>
+        <tr><td>Response</td></tr>
+        <tr><td><?php echo $click($this->response, TRUE); ?></td></tr>
+        <tr><td>Person</td></tr>
+        <tr><td><?php echo $click($this->person, TRUE); ?></td></tr>
+    </table>
+</div>
