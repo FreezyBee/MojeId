@@ -3,7 +3,7 @@ Quickstart
 
 
 Installation
------------
+------------
 
 The best way to install FreezyBee/MojeId is using  [Composer](http://getcomposer.org/):
 
@@ -19,7 +19,7 @@ extensions:
 ```
 
 Full configuration
----------------------
+------------------
 
 ```yml
 mojeId:
@@ -78,6 +78,9 @@ class SignPresenter extends BasePresenter
 	}
 }
 ```
+
+IMPORTANT !!!
+-------------
 
 In layout you MUST add this line - content = absolute path to mojeId action with parameter 'request' => 'xrds' 
 It is necessarily for server mojeid.cz.

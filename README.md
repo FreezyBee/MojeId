@@ -26,7 +26,10 @@ $ composer require freezy-bee/moje-id
 Documentation
 ------------
 
-Learn how to authenticate the user using mojeID in [documentation](https://github.com/FreezyBee/MojeId/blob/master/docs/en/index.md).
+Learn how to authenticate the user using mojeID in 
+[EN](https://github.com/FreezyBee/MojeId/blob/master/docs/en/index.md) or 
+[CZ](https://github.com/FreezyBee/MojeId/blob/master/docs/cs/index.md) 
+documentation.
 
 
 
