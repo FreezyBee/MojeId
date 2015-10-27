@@ -215,7 +215,7 @@ class Attributes extends Object
         'email' => [
             'scheme' => 'http://axschema.org/contact/email',
             'text' => 'Email – Hlavní',
-            'required' => false,
+            'required' => true,
             'simple' => true
         ],
         'email2' => [
