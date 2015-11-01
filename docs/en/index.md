@@ -51,10 +51,7 @@ class SignPresenter extends BasePresenter
 	/** @var UsersModel @inject */
 	public $usersModel;
 
-	/*
-	 *	@param $request - required !!!
-	 */
-	public function actionMojeId($request)
+	public function actionMojeId()
 	{
 		// register onResponse must be BEFORE calling tryLogin
 		$this->mojeId->onResponse[] = function (Nette\Utils\ArrayHash $person) {
@@ -69,8 +66,7 @@ class SignPresenter extends BasePresenter
 		};
 
 		try {
-			// $request is required !!!
-			$this->mojeId->tryLogin($request);
+			$this->mojeId->tryLogin();
 		} catch (\FreezyBee\MojeId\Exceptions\MojeIdException $e) {
 			Debugger::log($e);
 			...
@@ -82,9 +78,21 @@ class SignPresenter extends BasePresenter
 IMPORTANT !!!
 -------------
 
-In layout you MUST add this line - content = absolute path to mojeId action with parameter 'request' => 'xrds' 
-It is necessarily for server mojeid.cz.
+In layout you MUST add this line - content = absolute path to xrds.xml file. 
+It is necessarily for server mojeid.cz. And you MUST fill correct returnTo address.
 
 ```smarty
-<meta http-equiv="x-xrds-location" content="{plink //Sign:mojeId, request => xrds}"/>
+<meta http-equiv="x-xrds-location" content="{$baseUrl}/pathToXrds.xml"/>
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xrds:XRDS xmlns:xrds="xri://$xrds" xmlns="xri://$xrd*($v*2.0)">
+    <XRD>
+        <Service>
+            <Type>http://specs.openid.net/auth/2.0/return_to</Type>
+            <URI>** FILL returnTo URL **</URI>
+        </Service>
+    </XRD>
+</xrds:XRDS>
 ```

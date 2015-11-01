@@ -69,6 +69,19 @@ class MojeId extends Object
         $this->httpRequest = $httpRequest;
         $this->extAttributes = Attributes::getFields($config['fieldsType']);
         $this->httpResponse = $httpResponse;
+
+        $this->disableRandSource();
+    }
+
+    private function disableRandSource()
+    {
+        ob_start();
+
+        if (!is_readable('/dev/urandom')) {
+            define('Auth_OpenID_RAND_SOURCE', null);
+        }
+
+        ob_end_clean();
     }
 
     /**
@@ -214,14 +227,8 @@ class MojeId extends Object
         throw new MojeIdException('Unknown status');
     }
 
-    public function tryLogin($request)
+    public function tryLogin()
     {
-        if ($request === 'xrds') {
-            $latte = new \Latte\Engine;
-            $latte->render(__DIR__ . '/templates/xrds.latte', ['returnTo' => $this->getReturnTo()]);
-            exit;
-        }
-
         if ($this->httpRequest->getPost()) {
             $this->complete();
         } else {

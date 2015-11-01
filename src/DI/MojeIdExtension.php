@@ -36,7 +36,8 @@ class MojeIdExtension extends CompilerExtension
         if (count($config['policy'])) {
             foreach ($config['policy'] as $policy) {
                 if (!array_key_exists($policy, Policy::$pape)) {
-                    throw new AssertionException('MojeId - Wrong policy pape value given - allowed only [' . implode(', ', array_keys(Policy::$pape)) . ']');
+                    throw new AssertionException('MojeId - Wrong policy pape value given - allowed only [' .
+                        implode(', ', array_keys(Policy::$pape)) . ']');
                 } else {
                     $tmpPape[] = Policy::$pape[$policy];
                 }

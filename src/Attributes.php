@@ -4,6 +4,10 @@ namespace FreezyBee\MojeId;
 
 use Nette\Object;
 
+/**
+ * Class Attributes
+ * @package FreezyBee\MojeId
+ */
 class Attributes extends Object
 {
     const SIMPLE = 'simple';
@@ -351,13 +355,17 @@ class Attributes extends Object
         ]
     ];
 
+    /**
+     * @param $type
+     * @return array
+     */
     public static function getFields($type)
     {
         if ($type === self::FULL) {
             return self::$fields;
         } elseif ($type === self::SIMPLE) {
             $tmp = [];
-            foreach(self::$fields as $id => $field) {
+            foreach (self::$fields as $id => $field) {
                 if (isset($field['simple'])) {
                     $tmp[$id] = $field;
                 }

@@ -49,10 +49,7 @@ class SignPresenter extends BasePresenter
 	/** @var UsersModel @inject */
 	public $usersModel;
 
-	/*
-	 *	@param $request - nutné uvést !!! (kvůli ověření XDRS)
-	 */
-	public function actionMojeId($request)
+	public function actionMojeId()
 	{
 		// registrujte listener onResponse vždy před voláním metody tryLogin!!!
 		$this->mojeId->onResponse[] = function (Nette\Utils\ArrayHash $person) {
@@ -70,8 +67,7 @@ class SignPresenter extends BasePresenter
 		};
 
 		try {
-			// $request je potřeba kvůli XRDS
-			$this->mojeId->tryLogin($request);
+			$this->mojeId->tryLogin();
 		} catch (\FreezyBee\MojeId\Exceptions\MojeIdException $e) {
 		
 			// MojeIdException odchytává většinu nenormálních stavů
@@ -87,8 +83,20 @@ DŮLEŽITÉ !!!
 
 V šabloně je nutné do html headeru na hlavní stránku domény uvést meta tag (viz. dole).
 
-V content je nutné uvést absolutní odkaz na akci, která bere parametr 'request'. Je to nezbytné z důvodu ověření xrds serverem mojeid.cz.
+V content je nutné uvést absolutní odkaz na soubor xrds.xml, v kterém je nutné upravit returnTo adresu. Je to nezbytné z důvodu ověření xrds serverem mojeid.cz.
 
 ```smarty
-<meta http-equiv="x-xrds-location" content="{plink //Sign:mojeId, request => xrds}"/>
+<meta http-equiv="x-xrds-location" content="{$baseUrl}/pathToXrds.xml"/>
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xrds:XRDS xmlns:xrds="xri://$xrds" xmlns="xri://$xrd*($v*2.0)">
+    <XRD>
+        <Service>
+            <Type>http://specs.openid.net/auth/2.0/return_to</Type>
+            <URI>** FILL returnTo URL **</URI>
+        </Service>
+    </XRD>
+</xrds:XRDS>
 ```
