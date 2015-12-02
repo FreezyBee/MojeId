@@ -4,6 +4,10 @@ namespace FreezyBee\MojeId;
 
 use Nette\Object;
 
+/**
+ * Class Policy
+ * @package FreezyBee\MojeId
+ */
 class Policy extends Object
 {
     const CERTIFICATE = 'certificate';

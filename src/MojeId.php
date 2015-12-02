@@ -2,14 +2,11 @@
 
 namespace FreezyBee\MojeId;
 
-use FreezyBee\MojeId\Customer\Person;
 use FreezyBee\MojeId\Exceptions\MojeIdException;
 use Nette\Http\Request;
 use Nette\Http\Response;
 use Nette\Object;
 use Nette\Utils\ArrayHash;
-use Nette\Utils\Strings;
-use Tracy\Debugger;
 
 /**
  * Class MojeId
@@ -17,14 +14,10 @@ use Tracy\Debugger;
  */
 class MojeId extends Object
 {
-    /**
-     * @var array
-     */
+    /** @var callable[]  function (\Auth_OpenID_AuthRequest $authRequest); */
     public $onRequest = [];
 
-    /**
-     * @var array
-     */
+    /** @var callable[]  function (ArrayHash $person, Auth_OpenID_ConsumerResponse $response); */
     public $onResponse = [];
 
     /**
@@ -77,7 +70,7 @@ class MojeId extends Object
     {
         ob_start();
 
-        if (!is_readable('/dev/urandom')) {
+        if (!@is_readable('/dev/urandom')) {
             define('Auth_OpenID_RAND_SOURCE', null);
         }
 
@@ -145,11 +138,6 @@ class MojeId extends Object
         return ArrayHash::from($tmp);
     }
 
-    private function getXrdsLink()
-    {
-        return $this->getReturnTo() . '?xrds=request';
-    }
-
     /**
      * @throws MojeIdException
      */
@@ -174,7 +162,9 @@ class MojeId extends Object
         $authRequest->addExtension($axRequest);
 
         // add policy
-        $authRequest->addExtension(new \Auth_OpenID_PAPE_Request($this->config['policy']));
+        if ($this->config['policy']) {
+            $authRequest->addExtension(new \Auth_OpenID_PAPE_Request($this->config['policy']));
+        }
 
         if ($authRequest->shouldSendRedirect() || 1) {
             $redirectUrl = $authRequest->redirectURL($this->getTrustRoot(), $this->getReturnTo());
@@ -186,7 +176,12 @@ class MojeId extends Object
             $this->httpResponse->setHeader('Location', $redirectUrl);
 
         } else {
-            $formHtml = $authRequest->htmlMarkup($this->getTrustRoot(), $this->getReturnTo(), false, ['id' => 'mojeid_form']);
+            $formHtml = $authRequest->htmlMarkup(
+                $this->getTrustRoot(),
+                $this->getReturnTo(),
+                false,
+                ['id' => 'mojeid_form']
+            );
 
             if (\Auth_OpenID::isFailure($formHtml)) {
                 throw new MojeIdException('Could not redirect to server: ' . $formHtml->message);
@@ -212,7 +207,9 @@ class MojeId extends Object
         } elseif ($response->status == Auth_OpenID_FAILURE) {
             throw new MojeIdException('OpenID authentication failed: ' . $response->message);
         } elseif ($response->status == Auth_OpenID_SUCCESS) {
-            $identity = (isset($response->endpoint->claimed_id) ? $response->endpoint->claimed_id : $response->getDisplayIdentifier());
+            $identity = (isset($response->endpoint->claimed_id) ?
+                $response->endpoint->claimed_id :
+                $response->getDisplayIdentifier());
 
             $axResponse = \Auth_OpenID_AX_FetchResponse::fromSuccessResponse($response);
 

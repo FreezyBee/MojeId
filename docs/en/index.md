@@ -24,7 +24,7 @@ Full configuration
 ```yml
 mojeId:
 	serverUrl: "https://mojeid.fred.nic.cz/" # default https://mojeid.cz/
-	policy: [password, certificate, physical] # default [password]
+	policy: [password, certificate, physical] # default nothing
 	fieldsType: full # default simple
 ```
 

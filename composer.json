@@ -20,14 +20,10 @@
     }
   ],
   "require": {
-    "nette/nette": "~2.3",
-    "openid/php-openid": "~2.3"
-  },
-  "require-dev:": {
-    "tracy/tracy": "~2.3"
-  },
-  "suggest": {
-    "nette/di": "The extension can be registered using nette/di into your application"
+    "nette/application": "~2.3",
+    "openid/php-openid": "~2.3",
+    "tracy/tracy": "~2.3",
+    "nette/di" : "~2.3"
   },
   "autoload": {
     "psr-4": {

@@ -5,7 +5,9 @@ namespace FreezyBee\MojeId\Diagnostics;
 use FreezyBee\MojeId\MojeId;
 use Nette\Object;
 use Nette\Utils\ArrayHash;
+use Nette\Utils\Callback;
 use Tracy\Debugger;
+use Tracy\Dumper;
 use Tracy\IBarPanel;
 
 /**
@@ -45,9 +47,9 @@ class Panel extends Object implements IBarPanel
      */
     public function getPanel()
     {
-        $esc = \Nette\Utils\Callback::closure('Latte\Runtime\Filters::escapeHtml');
-        $click = function ($o, $c = FALSE) {
-            return \Tracy\Dumper::toHtml($o, ['collapse' => $c]);
+        $esc = Callback::closure('Latte\Runtime\Filters::escapeHtml');
+        $click = function ($o, $c = false) {
+            return Dumper::toHtml($o, ['collapse' => $c]);
         };
 
         ob_start();
@@ -55,17 +57,27 @@ class Panel extends Object implements IBarPanel
         return ob_get_clean();
     }
 
+    /**
+     * @param $request
+     */
     public function begin($request)
     {
         $this->request = ArrayHash::from($request);
     }
 
+    /**
+     * @param ArrayHash $person
+     * @param \Auth_OpenID_SuccessResponse $response
+     */
     public function complete(ArrayHash $person, \Auth_OpenID_SuccessResponse $response)
     {
         $this->person = $person;
         $this->response = ArrayHash::from($response);
     }
 
+    /**
+     * @param MojeId $mojeId
+     */
     public function register(MojeId $mojeId)
     {
         $mojeId->onRequest[] = $this->begin;

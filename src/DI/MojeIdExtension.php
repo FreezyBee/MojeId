@@ -43,8 +43,6 @@ class MojeIdExtension extends CompilerExtension
                 }
             }
             $config['policy'] = $tmpPape;
-        } else {
-            $config['policy'] = [Policy::$pape[Policy::PASSWORD]];
         }
 
         // fieldsType - simple or full

@@ -24,7 +24,7 @@ Celková konfigurace
 ```yml
 mojeId:
 	serverUrl: "https://mojeid.fred.nic.cz/" # <- oficiální testovací server, default je -> https://mojeid.cz/
-	policy: [password, certificate, physical] # <- způsoby ověření klienta, default je -> [password]
+	policy: [password, certificate, physical] # <- způsoby ověření klienta, default je -> nic
 	fieldsType: full # <- dotazovat se na všechny údaje, default je -> simple
 ```
 Pokud už netestujete, tak konfigurace je vlastně nepotřebná...
