@@ -7,7 +7,7 @@ MojeId authorization for Nette Framework
 Requirements
 ------------
 
-FreezyBee/MojeId requires PHP 5.6
+FreezyBee/MojeId requires PHP 5.4
 
 - [Nette Framework](https://github.com/nette/nette)
 - [PHP OpenID](https://github.com/openid/php-openid)
