@@ -11,6 +11,8 @@ use Nette\Utils\ArrayHash;
 /**
  * Class MojeId
  * @package App\Model
+ * @method onRequest(\Auth_OpenID_AuthRequest $authRequest)
+ * @method onResponse(ArrayHash $person, \Auth_OpenID_ConsumerResponse $response)
  */
 class MojeId extends Object
 {
@@ -174,6 +176,7 @@ class MojeId extends Object
             }
 
             $this->httpResponse->setHeader('Location', $redirectUrl);
+            $this->httpResponse->setCode(Response::S301_MOVED_PERMANENTLY);
 
         } else {
             $formHtml = $authRequest->htmlMarkup(

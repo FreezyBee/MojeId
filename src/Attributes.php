@@ -47,13 +47,13 @@ class Attributes extends Object
         'h_address' => [
             'scheme' => 'http://axschema.org/contact/postalAddress/home',
             'text' => 'Domácí adresa – Ulice',
-            'required' => true
+            'required' => true,
+            'simple' => true
         ],
         'h_address2' => [
             'scheme' => 'http://axschema.org/contact/postalAddressAdditional/home',
             'text' => 'Domácí adresa – Ulice2',
-            'required' => false,
-            'simple' => true
+            'required' => false
         ],
         'h_address3' => [
             'scheme' => 'http://specs.nic.cz/attr/addr/main/street3',

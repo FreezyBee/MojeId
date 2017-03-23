@@ -21,7 +21,7 @@
   ],
   "require": {
     "nette/application": "~2.3",
-    "openid/php-openid": "~2.3",
+    "openid/php-openid": "@dev",
     "tracy/tracy": "~2.3",
     "nette/di" : "~2.3"
   },
