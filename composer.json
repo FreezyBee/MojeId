@@ -22,7 +22,7 @@
   "require": {
     "nette/application": "~3.0.0",
     "openid/php-openid": "@dev",
-    "tracy/tracy": "~3.0.0",
+    "tracy/tracy": "~2.3",
     "nette/di" : "~3.0.0"
   },
   "autoload": {
