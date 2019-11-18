@@ -1,9 +1,10 @@
 {
-  "name": "pista5/moje-id",
+  "name": "freezy-bee/moje-id",
   "type": "library",
   "description": "Integration MojeID into Nette Framework.",
   "keywords": [
     "nette",
+    "freezy-bee",
     "mojeID"
   ],
   "homepage": "http://freezybee.ifire.cz",
