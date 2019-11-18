@@ -21,7 +21,7 @@
   ],
   "require": {
     "nette/application": "~3.0.0",
-    "practo/php7-openid": "@dev",
+    "openid/php-openid": "@dev",
     "tracy/tracy": "~2.3",
     "nette/di" : "~3.0.0"
   },
