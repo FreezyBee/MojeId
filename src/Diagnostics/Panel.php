@@ -3,7 +3,6 @@
 namespace FreezyBee\MojeId\Diagnostics;
 
 use FreezyBee\MojeId\MojeId;
-use Nette\Object;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Callback;
 use Tracy\Debugger;
@@ -14,8 +13,10 @@ use Tracy\IBarPanel;
  * Class Panel
  * @package FreezyBee\MojeId\Diagnostics
  */
-class Panel extends Object implements IBarPanel
+class Panel implements IBarPanel
 {
+    use \Nette\SmartObject;
+    
     /**
      * @var ArrayHash
      */
@@ -62,7 +63,7 @@ class Panel extends Object implements IBarPanel
      */
     public function begin($request)
     {
-        $this->request = ArrayHash::from($request);
+        $this->request = ArrayHash::from((array) $request);
     }
 
     /**
@@ -72,7 +73,7 @@ class Panel extends Object implements IBarPanel
     public function complete(ArrayHash $person, \Auth_OpenID_SuccessResponse $response)
     {
         $this->person = $person;
-        $this->response = ArrayHash::from($response);
+        $this->response = ArrayHash::from((array) $response);
     }
 
     /**
@@ -80,8 +81,8 @@ class Panel extends Object implements IBarPanel
      */
     public function register(MojeId $mojeId)
     {
-        $mojeId->onRequest[] = $this->begin;
-        $mojeId->onResponse[] = $this->complete;
+        $mojeId->onRequest[] = [$this, 'begin'];
+        $mojeId->onResponse[] = [$this, 'complete'];
         Debugger::getBar()->addPanel($this);
     }
 }
