@@ -59,8 +59,7 @@ class MojeIdExtension extends CompilerExtension
 
         if ($config['debugger']) {
             $builder->addDefinition($this->prefix('panel'))
-                ->setClass('FreezyBee\MojeId\Diagnostics\Panel')
-                ->setInject(false);
+                ->setClass('FreezyBee\MojeId\Diagnostics\Panel');
             $mojeId->addSetup($this->prefix('@panel') . '::register', ['@self']);
         }
     }
