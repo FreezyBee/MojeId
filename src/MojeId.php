@@ -15,6 +15,8 @@ use Nette\Utils\ArrayHash;
  */
 class MojeId
 {
+    use \Nette\SmartObject;
+    
     /** @var callable[]  function (\Auth_OpenID_AuthRequest $authRequest); */
     public $onRequest = [];
 
