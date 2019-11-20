@@ -135,7 +135,7 @@ class MojeId
         $tmp['identity'] = $identity;
 
         foreach ($this->extAttributes as $key => $value) {
-            $tmp[$key] = (isset($response->data[$value['scheme']][0]) ? $response->data[$value['scheme']][0] : '');
+            $tmp[$key] = $response->getSingle($value['scheme']);
         }
 
         return ArrayHash::from($tmp);
