@@ -223,9 +223,9 @@ class MojeId
             } else {
                 throw new MojeIdException('Invalid axResponse');
             }
+        } else {
+            throw new MojeIdException('Unknown status');
         }
-
-        throw new MojeIdException('Unknown status');
     }
 
     public function tryLogin()
