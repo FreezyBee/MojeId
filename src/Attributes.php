@@ -17,7 +17,8 @@ class Attributes
         'fullname' => [
             'scheme' => 'http://axschema.org/namePerson',
             'text' => 'Celé jméno',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ],
         'firstname' => [
             'scheme' => 'http://axschema.org/namePerson/first',
@@ -34,17 +35,19 @@ class Attributes
         'nick' => [
             'scheme' => 'http://axschema.org/namePerson/friendly',
             'text' => 'Přezdívka',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ],
         'company' => [
             'scheme' => 'http://axschema.org/company/name',
             'text' => 'Jméno společnosti',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ],
         'h_address' => [
             'scheme' => 'http://axschema.org/contact/postalAddress/home',
             'text' => 'Domácí adresa – Ulice',
-            'required' => false,
+            'required' => true,
             'simple' => true
         ],
         'h_address2' => [
@@ -60,25 +63,25 @@ class Attributes
         'h_city' => [
             'scheme' => 'http://axschema.org/contact/city/home',
             'text' => 'Domácí adresa – Město',
-            'required' => false,
+            'required' => true,
             'simple' => true
         ],
         'h_state' => [
             'scheme' => 'http://axschema.org/contact/state/home',
             'text' => 'Domácí adresa – Stát',
-            'required' => false,
+            'required' => true,
             'simple' => true
         ],
         'h_country' => [
             'scheme' => 'http://axschema.org/contact/country/home',
             'text' => 'Domácí adresa – Země',
-            'required' => false,
+            'required' => true,
             'simple' => true
         ],
         'h_postcode' => [
             'scheme' => 'http://axschema.org/contact/postalCode/home',
             'text' => 'Domácí adresa – PSČ',
-            'required' => false,
+            'required' => true,
             'simple' => true
         ],
         'b_address' => [
@@ -189,7 +192,7 @@ class Attributes
         'phone' => [
             'scheme' => 'http://axschema.org/contact/phone/default',
             'text' => 'Telefon – Hlavní',
-            'required' => true,
+            'required' => false,
             'simple' => true
         ],
         'phone_home' => [
@@ -205,7 +208,8 @@ class Attributes
         'phone_mobile' => [
             'scheme' => 'http://axschema.org/contact/phone/cell',
             'text' => 'Telefon – Mobil',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ],
         'fax' => [
             'scheme' => 'http://axschema.org/contact/phone/fax',
@@ -231,7 +235,8 @@ class Attributes
         'url' => [
             'scheme' => 'http://axschema.org/contact/web/default',
             'text' => 'URL – Hlavní',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ],
         'blog' => [
             'scheme' => 'http://axschema.org/contact/web/blog',
@@ -321,27 +326,32 @@ class Attributes
         'student' => [
             'scheme' => 'http://specs.nic.cz/attr/contact/student',
             'text' => 'Příznak - Student',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ],
         'valid' => [
             'scheme' => 'http://specs.nic.cz/attr/contact/valid',
             'text' => 'Příznak – Validace',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ],
         'status' => [
             'scheme' => 'http://specs.nic.cz/attr/contact/status',
             'text' => 'Stav účtu',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ],
         'adult' => [
             'scheme' => 'http://specs.nic.cz/attr/contact/adult',
             'text' => 'Příznak – Starší 18 let',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ],
         'image' => [
             'scheme' => 'http://specs.nic.cz/attr/contact/image',
             'text' => 'Obrázek (base64)',
-            'required' => false
+            'required' => false,
+            'simple' => true
         ]
     ];
 
