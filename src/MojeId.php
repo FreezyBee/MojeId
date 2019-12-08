@@ -5,7 +5,6 @@ namespace FreezyBee\MojeId;
 use FreezyBee\MojeId\Exceptions\MojeIdException;
 use Nette\Http\Request;
 use Nette\Http\Response;
-use Nette\Object;
 use Nette\Utils\ArrayHash;
 
 /**
@@ -14,8 +13,10 @@ use Nette\Utils\ArrayHash;
  * @method onRequest(\Auth_OpenID_AuthRequest $authRequest)
  * @method onResponse(ArrayHash $person, \Auth_OpenID_ConsumerResponse $response)
  */
-class MojeId extends Object
+class MojeId
 {
+    use \Nette\SmartObject;
+    
     /** @var callable[]  function (\Auth_OpenID_AuthRequest $authRequest); */
     public $onRequest = [];
 
@@ -134,7 +135,7 @@ class MojeId extends Object
         $tmp['identity'] = $identity;
 
         foreach ($this->extAttributes as $key => $value) {
-            $tmp[$key] = (isset($response->data[$value['scheme']][0]) ? $response->data[$value['scheme']][0] : '');
+            $tmp[$key] = $response->getSingle($value['scheme']);
         }
 
         return ArrayHash::from($tmp);
@@ -222,9 +223,9 @@ class MojeId extends Object
             } else {
                 throw new MojeIdException('Invalid axResponse');
             }
+        } else {
+            throw new MojeIdException('Unknown status');
         }
-
-        throw new MojeIdException('Unknown status');
     }
 
     public function tryLogin()
